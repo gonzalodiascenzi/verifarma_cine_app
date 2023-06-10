@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:verifarma_cine_app/config/constants/environment.dart';
 
 class HomeScreen extends StatelessWidget {
 
