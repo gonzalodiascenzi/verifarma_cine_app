@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
+import 'package:verifarma_cine_app/config/constants/environment.dart';
 
 import 'package:verifarma_cine_app/domain/datasources/movies_datasources.dart';
 import 'package:verifarma_cine_app/domain/entities/movie.dart';
-import '../../config/constants/environment.dart';
-import '../mappers/movie_mapper.dart';
-import '../models/moviedb/moviedb_response.dart';
+import 'package:verifarma_cine_app/infraestructure/mappers/movie_mapper.dart';
+import 'package:verifarma_cine_app/infraestructure/models/moviedb/moviedb_response.dart';
+
 
 class MoviedbDatasource extends MoviesDatasource {
 
@@ -42,6 +43,43 @@ class MoviedbDatasource extends MoviesDatasource {
     
     return _jsonToMovies(response.data);
   }
+  
+  @override
+  Future<List<Movie>> getPopular({int page = 1}) async {
+     
+    final response = await dio.get('/movie/popular', 
+      queryParameters: {
+        'page': page
+      }
+    );
+
+    return _jsonToMovies(response.data);    
+  }
+
+  @override
+  Future<List<Movie>> getTopRated({int page = 1}) async {
+     
+    final response = await dio.get('/movie/top_rated', 
+      queryParameters: {
+        'page': page
+      }
+    );
+
+    return _jsonToMovies(response.data);    
+  }
+
+   @override
+  Future<List<Movie>> getUpcoming({int page = 1}) async {
+     
+    final response = await dio.get('/movie/upcoming', 
+      queryParameters: {
+        'page': page
+      }
+    );
+
+    return _jsonToMovies(response.data);    
+  }
+
 
 
 }
