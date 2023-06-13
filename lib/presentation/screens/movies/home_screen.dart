@@ -11,7 +11,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: _HomeView());
+    return const Scaffold(
+      body: _HomeView(),
+      bottomNavigationBar: CustomBottomNavigation(),
+    );
   }
 }
 
@@ -32,19 +35,34 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-  
-  //  final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
+    final nowPlayingMovies = ref.watch(nowPlayingMoviesProvider);
 
-  final slideShowMovies = ref.watch(moviesSlideshowProvider);
+    final slideShowMovies = ref.watch(moviesSlideshowProvider);
 
-    return  Column(
-      children: [
-        const CustomAppbar(),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          const CustomAppbar(),
+    
+          MoviesSlideshow(movies: slideShowMovies),
+          
+          MovieHorizontalListview(
+              movies: nowPlayingMovies,
+              title: 'En cines',
+              subTitle: 'Junio',
+              loadNextPage: () =>
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
+    
+          MovieHorizontalListview(
+              movies: nowPlayingMovies,
+              title: 'En cines',
+              subTitle: 'Julio',
+              loadNextPage: () =>
+                  ref.read(nowPlayingMoviesProvider.notifier).loadNextPage()),
 
-        MoviesSlideshow(movies: slideShowMovies)
-        
-       
-      ],
+                  const SizedBox(height: 20),
+        ],
+      ),
     );
   }
 }
