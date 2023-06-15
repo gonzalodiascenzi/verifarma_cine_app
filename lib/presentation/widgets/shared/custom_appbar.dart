@@ -19,7 +19,7 @@ class CustomAppbar extends StatelessWidget {
             children: [
               Icon( Icons.movie_outlined, color: colors.primary ),
               const SizedBox( width: 5 ),
-              Text('Verifarma challenge', style: titleStyle ),
+              Text('Verifarma Challenge', style: titleStyle ),
       
               const Spacer(),
       

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:go_router/go_router.dart';
 import 'package:verifarma_cine_app/config/helpers/human_formats.dart';
 import 'package:verifarma_cine_app/domain/entities/movie.dart';
 
@@ -114,7 +115,10 @@ class _Slide extends StatelessWidget {
                       child: Center(child: CircularProgressIndicator(strokeWidth: 2 )),
                     );
                   }
-                  return FadeIn(child: child);
+                  return GestureDetector(
+                    onTap: () => context.push('/movie/${movie.id}'),
+                    child: FadeIn(child: child),
+                  );       
                 },
               ),
             ),
